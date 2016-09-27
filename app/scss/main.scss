@@ -1,0 +1,87 @@
+@import "bourbon";
+@import "vars";
+@import "fonts";
+@import "icons";
+@import "grid";
+@import "base";
+
+#header{
+  background: $first-color;
+  padding: 10px 0;
+  form{
+    margin-bottom: 0;
+  }
+  a{
+    color: #fff;
+  }
+  .btn-sm{
+    margin: 5px 0;
+  }
+}
+
+.logo{
+  font-weight: bold;
+  text-transform: uppercase;
+  font-size: 24px;
+}
+
+
+.form-search{
+  .form-group{
+    width: 76%;
+  }
+  input{
+    font-size: 14px;
+  }
+}
+
+.header-link{
+  font-size: 13px;
+  display: block;
+  padding: 9px 11px;
+  &:focus{
+    outline: 0;
+  }
+}
+
+.services-item{
+  img{
+    width: 100%;
+  }
+  h3{
+    font-size: 14px;
+    margin: 10px 0;
+  }
+  margin-bottom: 30px;
+}
+
+.services-item-wrap{
+  padding: 5px;
+  border: 1px solid #ccc;
+  height: 260px;
+  position: relative;
+}
+
+.service-item-middle{
+  h3{
+
+  }
+}
+
+.service-item-bottom{
+  bottom: 5px;
+  left: 0;
+  position: absolute;
+  width: 100%;
+  padding: 0 5px;
+}
+
+
+.icn-heart{
+  margin-top: 4px;
+  i{
+    color: lighten($first-color, 65);
+  }
+}
+
+

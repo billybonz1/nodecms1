@@ -1,0 +1,130 @@
+@import "bourbon";
+@import "vars";
+
+body input:focus:required:invalid,
+body textarea:focus:required:invalid{
+  color: #666;
+}
+
+body input:required:valid,
+body textarea:required:valid{
+  color: #666;
+}
+
+
+body{
+  font-size: 16px;
+  min-width: 320px;
+  position: relative;
+  line-height: 1.6;
+  font-family: $default-font;
+  overflow-x: hidden;
+}
+
+h2{
+  margin: 20px 0 15px;
+  text-align: center;
+  font-weight: bold;
+}
+
+.inner{
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+input{
+  @include placeholder {
+    font-family: $default-font;
+  }
+}
+
+.btn{
+  outline: 0;
+}
+
+.btn-my{
+  border-color: $button-color;
+  background: $button-color;
+  color: #fff;
+  &.btn-my-outline{
+    color: $button-color;
+    background: transparent;
+    &:hover,&:active:focus,&:focus{
+      color: #fff;
+    }
+  }
+  &:hover{
+    background: darken($button-color,4);
+    border-color: darken($button-color,4);
+  }
+  &:active:focus{
+    background: darken($button-color,10);
+    border-color: darken($button-color,10);
+    outline: 0;
+  }
+  &:focus{
+    background: darken($button-color,5);
+    border-color: darken($button-color,5);
+    outline: 0;
+  }
+}
+
+
+[data-hint]:before {
+  content: '';
+  position: absolute;
+  background: transparent;
+  border: 6px solid transparent;
+  z-index: 1000001;
+}
+
+[data-hint]:after {
+  content: attr(data-hint);
+  background: $first-color;
+  color: white;
+  text-shadow: 0 -1px 0px black;
+  padding: 7px 9px;
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: 500;
+  white-space: nowrap;
+  text-decoration: none;
+  text-transform: none;
+  text-indent: 0;
+  border-radius: 4px;
+  box-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+}
+
+[data-hint]:before, [data-hint]:after {
+  position: absolute;
+  visibility: hidden;
+  opacity: 0;
+  z-index: 1000000;
+  pointer-events: none;
+  transition: 0.2s ease;
+  transform: translate3d(0, 0, 0);
+}
+.hint--top{
+  position: relative;
+}
+
+.hint--top:before {
+  margin-left: -5px;
+  margin-bottom: -12px;
+  border-top-color: $first-color;
+}
+
+.hint--top:after {
+  margin-left: -22px;
+}
+.hint--top:before, .hint--top:after {
+  bottom: 100%;
+  left: 50%;
+}
+[data-hint]:hover:before, [data-hint]:hover:after {
+  visibility: visible;
+  opacity: 1;
+}
+.hint--top:hover:before, .hint--top:hover:after {
+  transform: translateY(-10px);
+}

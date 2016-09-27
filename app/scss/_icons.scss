@@ -1,0 +1,10 @@
+@import "../libs/font-awesome/scss/_variables.scss";
+$fa-font-path: "../libs/font-awesome/fonts";
+@import "../libs/font-awesome/scss/_path.scss";
+@import "../libs/font-awesome/scss/_core.scss";
+.fa-search:before {
+  content: "\f002";
+}
+.fa-heart:before {
+  content: "\f004";
+}
