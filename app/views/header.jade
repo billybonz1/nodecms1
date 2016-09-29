@@ -1,0 +1,50 @@
+doctype html
+html
+  head
+    meta(charset='utf-8')
+    title #{title}
+    meta(name='description', content='')
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+    meta(name='viewport', content='width=device-width, initial-scale=1, maximum-scale=1')
+    // Template Basic Images Start
+    meta(property='og:image', content='path/to/image.jpg')
+    link(rel='shortcut icon', href='img/favicon/favicon.ico', type='image/x-icon')
+    link(rel='apple-touch-icon', href='img/favicon/apple-touch-icon.png')
+    link(rel='apple-touch-icon', sizes='72x72', href='img/favicon/apple-touch-icon-72x72.png')
+    link(rel='apple-touch-icon', sizes='114x114', href='img/favicon/apple-touch-icon-114x114.png')
+    link(rel='stylesheet', href='/css/main.min.css')
+    script(src='/libs/angular/angular.min.js')
+    script(src='/js/app.js')
+  body(ng-app='OneStep')
+    #myModal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='myModalLabel', aria-hidden='true')
+      .modal-dialog(role='document')
+        .modal-content
+          .modal-header
+            button.close(type='button', data-dismiss='modal', aria-label='Close')
+              span(aria-hidden='true') &times;
+            h4#myModalLabel.modal-title Modal title
+          .modal-body
+            | ...
+          .modal-footer
+            button.btn.btn-secondary(type='button', data-dismiss='modal') Close
+            button.btn.btn-primary(type='button') Save changes
+    #header
+      .inner
+        .container-fluid
+          .row
+            .col-md-2
+              a.logo(href='/')
+                | OneStep
+            .col-md-5
+              form.form-inline.form-search(action='#', name='search')
+                .form-group
+                  .input-group
+                    input.form-control(type='text', placeholder='Найти услугу', ng-model='inputtext')
+                button.btn.btn-my.btn-my-outline(type='submit')
+                  i.fa.fa-search
+            .col-md-5
+              a.btn.btn-my.btn-sm.pull-md-right(href='#')
+                | Connect
+              a.header-link.pull-md-right(href='/users/login') Войти
+              a.header-link.pull-md-right(href='/users/signup')
+                | Зарегистрироваться

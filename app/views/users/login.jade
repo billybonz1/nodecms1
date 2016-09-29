@@ -1,0 +1,17 @@
+include ../header
+#login
+    .inner
+        .container-fluid
+            .row
+                .col-lg-12
+                    form.form-login(name='search', action='/users/login', method='POST')
+                        h1 #{headerTitle}
+                        .form-group
+                            input.form-control(required='', type='text', placeholder='E-mail', name='email', maxlength='80')
+                        .form-group
+                            input.form-control(required='', type='password', placeholder='Пароль' name='pass')
+                        button.btn.btn-my.btn-my-outline(type='submit') #{buttonName}
+                        .registrations
+                            br
+                            a(href="/users/signup") Зарегистрироваться
+include ../footer

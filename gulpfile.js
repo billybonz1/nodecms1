@@ -15,26 +15,36 @@ var gulp           = require('gulp'),
     gulpRemoveHtml = require('gulp-remove-html'),
     bourbon        = require('node-bourbon'),
     ftp            = require('vinyl-ftp'),
+    html2jade = require('gulp-html2jade'),
     notify         = require("gulp-notify");
+
+
+gulp.task('html2jade', function(){
+    gulp.src('template/index.html')
+        .pipe(html2jade({nspaces:2}))
+        .pipe(rename(function (path) {
+            path.basename = "test";
+        }))
+        .pipe(gulp.dest('app/views'));
+});
+
 
 gulp.task('browser-sync', function() {
     browserSync({
-        server: {
-            baseDir: 'template'
-        },
+        proxy: 'http://localhost:3000/',
         notify: false
     });
 });
 
 gulp.task('sass', [], function() {
-    return gulp.src('template/scss/**/*.scss')
+    return gulp.src('app/public/scss/**/*.scss')
         .pipe(sass({
             includePaths: bourbon.includePaths
         }).on("error", notify.onError()))
         .pipe(rename({suffix: '.min', prefix : ''}))
         .pipe(autoprefixer(['last 15 versions']))
         .pipe(cleanCSS())
-        .pipe(gulp.dest('template/css'))
+        .pipe(gulp.dest('app/public/css'))
         .pipe(browserSync.reload({stream: true}))
 });
 
@@ -52,19 +62,20 @@ gulp.task('headersass', function() {
 
 gulp.task('libs', function() {
     return gulp.src([
-        'template/libs/jquery/dist/jquery.min.js',
-        'template/libs/bootstrap/js/dist/util.js',
-        'template/libs/bootstrap/js/dist/modal.js'
+        'app/public/libs/jquery/dist/jquery.min.js',
+        'app/public/libs/bootstrap/js/dist/util.js',
+        'app/public/libs/bootstrap/js/dist/modal.js'
     ])
         .pipe(concat('libs.min.js'))
         .pipe(uglify())
-        .pipe(gulp.dest('template/js'));
+        .pipe(gulp.dest('app/public/js'));
 });
 
 gulp.task('watch', ['sass', 'libs', 'browser-sync'], function() {
-    gulp.watch('template/scss/**/*.scss', ['sass']);
-    gulp.watch('template/*.html', browserSync.reload);
-    gulp.watch('template/js/**/*.js', browserSync.reload);
+    gulp.watch('app/public/scss/**/*.scss', ['sass']);
+    gulp.watch(['app/views/**/*.jade','app/**/*.js'], function(){
+        setTimeout(browserSync.reload, 1000);
+    });
 });
 
 gulp.task('imagemin', function() {
