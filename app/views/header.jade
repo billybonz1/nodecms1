@@ -43,8 +43,11 @@ html
                 button.btn.btn-my.btn-my-outline(type='submit')
                   i.fa.fa-search
             .col-md-5
-              a.btn.btn-my.btn-sm.pull-md-right(href='#')
-                | Connect
-              a.header-link.pull-md-right(href='/users/login') Войти
-              a.header-link.pull-md-right(href='/users/signup')
-                | Зарегистрироваться
+              -if (!userID)
+                a.btn.btn-my.btn-sm.pull-md-right(href='#')
+                  | Connect
+                a.header-link.pull-md-right(href='/users/login') Войти
+                a.header-link.pull-md-right(href='/users/signup')
+                  | Зарегистрироваться
+              - else
+                a.header-link.pull-md-right(href='/users/signout') Выйти
