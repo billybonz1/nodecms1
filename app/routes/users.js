@@ -7,7 +7,6 @@ router.get('/', function(req, res, next) {
     var User = mongoose.model('User', userScheme);
     var userID = req.cookies.userID;
     User.find({
-        _id: userID
     })
         .exec(function(err, user){
            if (err) throw err;
@@ -64,11 +63,8 @@ router.post('/login', function (req, res, next) {
 
 //GET SignOUT
 router.get('/signout', function (req, res, next) {
-    res.cookie('userID',"",{
-        maxAge: new Date(Date.now() + 10),
-        expires: new Date(Date.now() + 9000),
-        httpOnly: true
-    });
+    res.clearCookie('userID');
+    return res.redirect('/');
 });
 
 
