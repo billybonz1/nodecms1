@@ -16,6 +16,7 @@ var gulp           = require('gulp'),
     bourbon        = require('node-bourbon'),
     ftp            = require('vinyl-ftp'),
     html2jade = require('gulp-html2jade'),
+    jade = require('gulp-jade'),
     notify         = require("gulp-notify");
 
 
@@ -27,6 +28,18 @@ gulp.task('html2jade', function(){
         }))
         .pipe(gulp.dest('app/views'));
 });
+
+
+gulp.task('jade2html', function() {
+    var YOUR_LOCALS = {};
+
+    gulp.src('app/public/views/jade/**/*.jade')
+        .pipe(jade({
+            locals: YOUR_LOCALS
+        }))
+        .pipe(gulp.dest('app/public/views/'))
+});
+
 
 
 gulp.task('browser-sync', function() {

@@ -10,18 +10,4 @@ userScheme = mongoose.Schema({
     role: {type: String, default: 'User'}
 });
 
-categoryScheme = mongoose.Schema({
-    name: String,
-    desc: String,
-    parentId: {type: String, default: null},
-    depth: {type: Number, default: 0},
-    img_url: String
-});
-
-stepsScheme = mongoose.Schema({
-    name: String,
-    categoryId: String,
-    rating: Number,
-    userId: Number,
-});
 

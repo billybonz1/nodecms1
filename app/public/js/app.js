@@ -1,7 +1,15 @@
-var app = angular.module('OneStep',[]);
+var app = angular.module('OneStep',['ngRoute']);
 
-app.controller('servicesController',function($scope){
-    $scope.services  = [
+
+// app.config(function($routeProvider){
+//     $routeProvider.when('/',{
+//         controller: 'stepsController',
+//     });
+// });
+
+
+app.controller('stepsController',function($scope){
+    $scope.steps  = [
         {
             title: "Я установлю розетку в вашей квартире",
             price: "5",
@@ -24,7 +32,7 @@ app.controller('servicesController',function($scope){
             img: "./img/img.jpg"
         }
     ];
-    $scope.newService = {
+    $scope.newStep = {
         created_at: "",
         title: "",
         price: "",
@@ -32,10 +40,10 @@ app.controller('servicesController',function($scope){
         rating: "0",
         img: "./img/img.jpg"
     };
-    $scope.addService = function(){
-        $scope.newService.created_by = Date.now();
-        $scope.services.push($scope.newService);
-        $scope.newService = {
+    $scope.addStep = function(){
+        $scope.newStep.created_by = Date.now();
+        $scope.steps.push($scope.newStep);
+        $scope.newStep = {
             created_at: "",
             title: "",
             price: "",
