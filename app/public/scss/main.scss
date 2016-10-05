@@ -91,11 +91,13 @@
   padding: 0 5px;
 }
 
-
-.icn-heart{
-  margin-top: 4px;
-  i{
-    color: lighten($first-color, 65);
+.price-group{
+  input.form-control{
+    width: 80%;
+  }
+  select.form-control{
+    width: 20%;
+    font-size: 13px;
   }
 }
 

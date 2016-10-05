@@ -84,9 +84,12 @@ gulp.task('libs', function() {
         .pipe(gulp.dest('app/public/js'));
 });
 
-gulp.task('watch', ['sass', 'libs', 'browser-sync'], function() {
+gulp.task('watch', ['sass', 'libs', 'browser-sync','jade2html'], function() {
     gulp.watch('app/public/scss/**/*.scss', ['sass']);
     gulp.watch(['app/views/**/*.jade','app/**/*.js'], function(){
+        setTimeout(browserSync.reload, 1000);
+    });
+    gulp.watch(['app/public/views/jade/**/*.jade'], ['jade2html'], function(){
         setTimeout(browserSync.reload, 1000);
     });
 });

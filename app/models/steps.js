@@ -3,12 +3,14 @@ var mongoose = require('mongoose');
 var stepsScheme = mongoose.Schema({
     label: String,
     name: String,
+    desc: String,
     categoryId: String,
-    rating: Number,
+    rating: {type: Number, default: 0},
     userId: Number,
-    price: Number,
-    currency: {type: String, default: "грн."},
-    create_date: {type: Date, default: Date.now}
+    price: {type: Number, default: 0},
+    currency: {type: String, default: "UAH"},
+    create_date: {type: Date, default: Date.now},
+    img: {type: String, default: "./img/img.jpg"}
 });
 var Step = module.exports = mongoose.model('Step', stepsScheme);
 
@@ -33,7 +35,10 @@ module.exports.updateStep = function(id, step, options,  callback){
     var query = {_id: id};
     var update = {
         name: step.name,
-        label: step.label
+        label: step.label,
+        price: step.price,
+        currency: step.currency,
+        desc: step.desc
     };
     Step.findOneAndUpdate(query, update, options, callback);
 };

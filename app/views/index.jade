@@ -1,4 +1,10 @@
 include header
-include steps/steps
 
+div(id='steps top-steps')
+    .inner
+        .container-fluid
+            .btn-group(role="group")
+                a.btn.btn-secondary(type="button", href="/#/") Steps
+                a.btn.btn-secondary(type="button", href="/#/addstep") Add Step
+            div(ng-view)
 include footer

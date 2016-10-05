@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var mongoose = require('mongoose');
+var functions = require('../functions');
 var Category = require('../models/categories');
 var Step = require('../models/steps');
 router.get('/', function(req, res, next) {
@@ -59,8 +60,17 @@ router.get('/steps', function(req, res, next) {
     });
 });
 
+
+
+// Добавление постов
 router.post('/steps', function(req, res, next) {
-    var step = req.body;
+    var step = {
+        name: functions.urlTranslit(req.body.label),
+        price: req.body.price,
+        currency: req.body.currency,
+        label: req.body.label,
+        desc: req.body.desc
+    };
     Step.addStep(step, function(err, step){
         if(err){
             throw err;
@@ -72,7 +82,13 @@ router.post('/steps', function(req, res, next) {
 
 router.put('/steps/:_id', function(req, res, next) {
     var id = req.params._id;
-    var step = req.body;
+    var step = {
+        name: functions.urlTranslit(req.body.label),
+        price: req.body.price,
+        currency: req.body.currency,
+        label: req.body.label,
+        desc: req.body.desc
+    };
     Step.updateStep(id, step, {}, function(err, step){
         if(err){
             throw err;

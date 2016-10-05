@@ -56,16 +56,19 @@ input{
   &:hover{
     background: darken($button-color,4);
     border-color: darken($button-color,4);
+    color: #fff;
   }
   &:active:focus{
     background: darken($button-color,10);
     border-color: darken($button-color,10);
     outline: 0;
+    color: #fff;
   }
   &:focus{
     background: darken($button-color,5);
     border-color: darken($button-color,5);
     outline: 0;
+    color: #fff;
   }
 }
 

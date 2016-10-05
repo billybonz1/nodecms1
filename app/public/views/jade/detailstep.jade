@@ -1,0 +1,10 @@
+.row(ng-init="getStep()")
+    .col-lg-12
+        h1 {{step.label}}
+    .col-md-4
+        img(ng-src="{{step.img}}")
+    .col-md-8
+        p {{step.desc}}
+    .col-lg-12
+        a.btn.btn-danger.pull-xs-right(href='#') Удалить
+        a.btn.btn-my.pull-xs-right(href='#/steps/edit/{{step._id}}') Редактировать

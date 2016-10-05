@@ -8,3 +8,10 @@ $fa-font-path: "../libs/font-awesome/fonts";
 .fa-heart:before {
   content: "\f004";
 }
+
+.icn-heart{
+  margin-top: 4px;
+  i{
+    color: lighten($first-color, 65);
+  }
+}
