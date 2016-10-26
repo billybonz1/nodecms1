@@ -1,3 +1,5 @@
 /node_modules/
 /data/
 /app/node_modules/
+/app2/node_modules/
+/app2/typings/
