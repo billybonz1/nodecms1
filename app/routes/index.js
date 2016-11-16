@@ -6,7 +6,7 @@ router.get('/', function(req, res, next) {
   var userID = req.cookies.userID;
   res.render('index', {
     title: "OneStep",
-    userID: userID
+    userID: userID,
   });
 });
 

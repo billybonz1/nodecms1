@@ -1,5 +1,6 @@
 "use strict";
 var express = require("express");
+var app = express();
 var path = require("path");
 var favicon = require("serve-favicon");
 var logger = require("morgan");
@@ -8,12 +9,22 @@ var bodyParser = require("body-parser");
 var mongoose = require("mongoose");
 var passport = require('passport');
 
+
+// Initialize passport for use
+app.use(passport.initialize());
+
 var db = require("./config/db");
+
+// Bring in passport strategy we just defined
+require('./config/passport')(passport);
+
+
+
 var routes = require("./routes/index");
 var users = require("./routes/users");
 var api = require("./routes/api");
 
-var app = express();
+
 
 
 // view engine setup
@@ -64,8 +75,7 @@ app.use(function(err, req, res, next) {
   });
 });
 
-// Initialize passport for use
-require('./config/passport')(passport);
+
 
 
 module.exports = app;
