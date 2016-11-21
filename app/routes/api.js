@@ -14,7 +14,6 @@ router.get('/', function(req, res, next) {
     res.send('This is API!');
 });
 
-
 // API Add, Edit, Delete Categories;
 router.get('/categories', function(req, res, next) {
     Category.getCategories(function(err, genres){
@@ -59,7 +58,7 @@ router.delete('/categories/:_id', function(req, res, next) {
 
 
 //Get All Steps
-router.get('/steps', function(req, res, next) {
+router.get('/steps',  function(req, res, next) {
     Step.getSteps(function(err, steps){
         if(err){
             throw err;
@@ -69,13 +68,16 @@ router.get('/steps', function(req, res, next) {
 });
 
 // Add steps
-router.post('/steps', function(req, res, next) {
+router.post('/steps', passport.authenticate('jwt', {session: false}), function(req, res, next) {
+    console.log(req.user._id);
     var step = {
         name: functions.urlTranslit(req.body.label),
         price: req.body.price,
         currency: req.body.currency,
         label: req.body.label,
-        desc: req.body.desc
+        desc: req.body.desc,
+        userID: req.user._id,
+        username: req.user.username
     };
     Step.addStep(step, function(err, step){
         if(err){
@@ -84,21 +86,41 @@ router.post('/steps', function(req, res, next) {
         res.json(step);
     });
 });
+
+
 // Edit steps
-router.put('/steps/:_id', function(req, res, next) {
-    var id = req.params._id;
-    var step = {
-        name: functions.urlTranslit(req.body.label),
-        price: req.body.price,
-        currency: req.body.currency,
-        label: req.body.label,
-        desc: req.body.desc
-    };
-    Step.updateStep(id, step, {}, function(err, step){
+router.put('/steps/:_id', passport.authenticate('jwt', {session: false}),  function(req, res, next) {
+    var stepId = req.params._id;
+
+
+    function updateStep(stepId){
+      var step = {
+          name: functions.urlTranslit(req.body.label),
+          price: req.body.price,
+          currency: req.body.currency,
+          label: req.body.label,
+          desc: req.body.desc
+      };
+      Step.updateStep(stepId, step, {}, function(err, step){
+          if(err){
+              throw err;
+          }
+          res.json(step);
+      });
+    }
+
+
+    Step.getStepById(stepId, function(err, step){
         if(err){
             throw err;
         }
-        res.json(step);
+        if(step.userID == req.user._id){
+          updateStep(stepId);
+        }else{
+          res.json({
+            success: false
+          });
+        }
     });
 });
 
@@ -113,38 +135,53 @@ router.get('/steps/:_id', function(req, res, next) {
 });
 
 //Delete step by ID
-router.delete('/steps/:_id', function(req, res, next) {
-    var id = req.params._id;
-    Step.deleteStep(id, function(err, step){
+router.delete('/steps/:_id', passport.authenticate('jwt', {session: false}), function(req, res, next) {
+    var stepId = req.params._id;
+
+    function deleteStep(stepId){
+      Step.deleteStep(stepId, function(err, step){
+          if(err){
+              throw err;
+          }
+          res.json(step);
+      });
+    }
+    // Check creator of step
+    Step.getStepById(stepId, function(err, step){
         if(err){
             throw err;
         }
-        res.json(step);
+        if(step.userID == req.user._id){
+          deleteStep(stepId);
+        }else{
+          res.json({
+            success: false
+          });
+        }
     });
 });
 
 
 
-
-
 //Register new Users
 router.post('/register', function(req, res){
-    if(!req.body.email || !req.body.password){
+    if(!req.body.email || !req.body.password || !req.body.username){
         res.json({
             success: false,
-            message: "Пожалуйста ввведите e-mail и пароль для регистрации."
+            message: "Пожалуйста ввведите e-mail, никнейм и пароль для регистрации."
         });
     } else {
         var newUser = new User({
             email: req.body.email,
-            password: req.body.password
+            password: req.body.password,
+            username: req.body.username
         });
         // Attempt to save the new users
         newUser.save(function (err) {
             if(err){
                 return res.json({
                     success: false,
-                    message: "Пользователь с таким e-mail уже существует."
+                    message: "Пользователь с такими данными уже существует."
                 })
             }
             res.json({
@@ -154,6 +191,46 @@ router.post('/register', function(req, res){
         });
     }
 });
+
+//Check on existing email
+router.post('/register/checkEmail', function(req, res){
+    User.findOne({
+      email: req.body.email
+    }, function(err, user){
+      if (err) throw err;
+      if(user) {
+          res.json({
+              success: false,
+              message: 'Пользователь с таким e-mail уже существует.'
+          });
+      }else{
+        res.json({
+            success: true
+        });
+      }
+    });
+});
+
+//Check on existing username
+router.post('/register/checkUsername', function(req, res){
+    User.findOne({
+      username: req.body.username
+    }, function(err, user){
+      if (err) throw err;
+      if(user) {
+          res.json({
+              success: false,
+              message: 'Пользователь с таким никнеймом уже существует.'
+          });
+      }else{
+          res.json({
+              success: true
+          });
+      }
+    });
+});
+
+
 
 
 //Authenticate the user and get JWT
@@ -178,12 +255,14 @@ router.post('/authenticate', function(req, res){
                     });
                     res.json({
                         success: true,
-                        token: 'JWT ' + token
+                        token: 'JWT ' + token,
+                        userID: user._id,
+                        username: user.username
                     });
                 }else {
                     res.send({
                         success: false,
-                        message: 'Авторизация провалена. Пароли не совпадают.'
+                        message: 'Авторизация провалена. Неправильный пароль.'
                     });
                 }
             });

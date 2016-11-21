@@ -72,6 +72,10 @@ input{
   }
 }
 
+a.btn-danger:not([href]){
+  color: #fff !important;
+}
+
 
 [data-hint]:before {
   content: '';

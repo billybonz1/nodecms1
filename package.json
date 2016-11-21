@@ -4,8 +4,8 @@
   "description": "",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "set NODE_ENV=development &&webpack",
-    "build": "set NODE_ENV=production &&webpack",
+    "start": "set NODE_ENV=development&&webpack",
+    "build": "set NODE_ENV=production&&webpack",
     "data": "mongod --dbpath=data",
     "server": "supervisor app/bin/www"
   },
@@ -46,6 +46,7 @@
   },
   "dependencies": {
     "angular": "^1.5.8",
+    "angular-cookies": "^1.5.8",
     "angular-ui-router": "^0.3.1",
     "bcrypt-nodejs": "0.0.3",
     "body-parser": "~1.15.1",

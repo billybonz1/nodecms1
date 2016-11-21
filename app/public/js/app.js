@@ -1,8 +1,26 @@
 "use strict";
 import angular from 'angular';
 import uiRouter from 'angular-ui-router';
-var app = angular.module("OneStep", [uiRouter]);
+import ngCookies from 'angular-cookies';
+var app = angular.module("OneStep", [uiRouter, ngCookies]);
 
+app.run(["$rootScope", "$cookies" , function($rootScope, $cookies){
+    if($cookies.get('token')){
+        $rootScope.token = $cookies.get('token');
+    }
+    if($cookies.get('userID')){
+        $rootScope.userID = $cookies.get('userID');
+    }
+    if($cookies.get('username')){
+        $rootScope.username = $cookies.get('username');
+        $rootScope.usernameFirstLetter = $rootScope.username[0];
+    }
+}]);
+
+
+// app.config(["$locationProvider", function($locationProvider) {
+//   $locationProvider.html5Mode(true);
+// }]);
 app.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
 
     $urlRouterProvider.otherwise("/");
@@ -27,37 +45,62 @@ app.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $u
         controller: "stepsController",
         templateUrl: "views/editstep.html"
     });
+
+    $stateProvider.state("register", {
+        url: "/register",
+        controller: "registerController",
+        templateUrl: "views/register.html"
+    });
+
+    $stateProvider.state("login", {
+        url: "/login",
+        controller: "loginController",
+        templateUrl: "views/login.html"
+    });
+
+
+    $stateProvider.state("userProfile", {
+        url: "/user/:username",
+        controller: "userController",
+        templateUrl: "views/user/profile.html"
+    });
+
+
 }]);
 
+import {stepsController} from "../controllers/steps";stepsController(app);
 
-app.controller("stepsController", ["$scope", "$http", "$location", "$stateParams", function ($scope, $http, $location, $stateParams) {
-
-
-    $scope.getSteps = function () {
-        $http.get("/api/steps").success(function (response) {
-            $scope.steps = response;
+app.component('steps', {
+    template: `
+      <step ng-repeat="step in $ctrl.steps" step='step'></step>
+    `,
+    controller: function($http){
+        var ctrl = this;
+        $http({
+          method: 'GET',
+          url: '/api/steps'
+        }).success(function (response) {
+            ctrl.steps = response;
         });
-    };
-    $scope.getStep = function () {
-        var id = $stateParams.id;
-        $http.get("/api/steps/" + id).success(function (response) {
-            $scope.step = response;
-        });
-    };
-    $scope.addStep = function () {
-        $scope.step.create_date = Date.now();
-        $http.post("/api/steps/", $scope.step).success(function () {
-            window.location.href = "#/";
-        });
-    };
+    }
+});
 
-    $scope.updateStep = function () {
-        var id = $stateParams.id;
-        $http.put("/api/steps/" + id, $scope.step).success(function () {
-            window.location.href = "#/steps/" + id;
-        });
-    };
-}]);
+
+app.component('step', {
+    template: `
+      {{$ctrl.step.label}}
+    `,
+    bindings: {
+      step: '<'
+    },
+    controller: function(){}
+});
 
 
 
+
+
+import {registerController} from "../controllers/register";registerController(app);
+import {loginController} from "../controllers/login";loginController(app);
+import {userMenuController} from "../controllers/userMenu";userMenuController(app);
+import {userController} from "../controllers/user";userController(app);

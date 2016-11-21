@@ -5,6 +5,6 @@
         img(ng-src="{{step.img}}")
     .col-md-8
         p {{step.desc}}
-    .col-lg-12
-        a.btn.btn-danger.pull-xs-right(href='#') Удалить
-        a.btn.btn-my.pull-xs-right(href='#/steps/edit/{{step._id}}') Редактировать
+    .col-lg-12(ng-show="checkMyStep()") 
+        a.btn.btn-danger.pull-xs-right(ng-click='deleteStep()') Удалить
+        a.btn.btn-my.pull-xs-right(ng-href='#/steps/edit/{{step._id}}') Редактировать

@@ -6,6 +6,8 @@
         p.text-xs-center Топовых услуг нет
     .col-md-3.services-item(ng-repeat='step in steps')
         .services-item-wrap
+            div.services-item-seller
+              a.seller-name {{step.username}}
             a.service-item-middle(ng-href='/#/steps/{{step._id}}')
                 img(ng-src='{{step.img}}', alt='{{step.label}}')
                 h3
@@ -14,3 +16,5 @@
                 a.icn-heart.hint--top.pull-xs-left(href='', data-hint='Добавить в любимые')
                     i.fa.fa-heart
                 strong.pull-xs-right {{step.price}} {{step.currency}}
+.row
+    steps

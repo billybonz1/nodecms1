@@ -52,7 +52,10 @@ router.post('/authenticate', function(req, res){
                    var token = jwt.sign(user, config.secret, {
                       expiresIn: 10080 // in seconds
                    });
-                   res.json({ success: true, token: 'JWT ' + token});
+                   res.json({
+                     success: true,
+                     token: 'JWT ' + token
+                   });
                } else {
                    res.json({ success: false, message: 'Авторизация провалена. Паррли не совпадают.'});
                }

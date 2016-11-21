@@ -18,6 +18,10 @@ var UserSchema = new mongoose.Schema({
        type: String,
        enum: ['User', 'Manager', 'Admin'],
        default: ['User']
+   },
+   username: {
+      type: String,
+      required: true
    }
 });
 

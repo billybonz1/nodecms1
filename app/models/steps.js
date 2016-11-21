@@ -6,8 +6,13 @@ var stepsScheme = mongoose.Schema({
     desc: String,
     categoryId: String,
     rating: {type: Number, default: 0},
-    userId: Number,
-    price: {type: Number, default: 0},
+    userID: {
+      type: String
+    },
+    username: {
+      type: String,
+    },
+    price: {type: Number, Default: 0},
     currency: {type: String, default: "UAH"},
     create_date: {type: Date, default: Date.now},
     img: {type: String, default: "./img/img.jpg"}
