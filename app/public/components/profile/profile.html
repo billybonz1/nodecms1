@@ -1,0 +1,62 @@
+<div class="profile" ng-init="profile.getUser()">
+  <div class="profile__top">
+    <div class="inner">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-lg-2">
+            <div ng-show="profile.checkMyProfile()" ngf-drop="profile.upload($file)" ngf-select="profile.upload($file)" class="profile__avatar profile_my"
+                 ngf-drag-over-class="'dragover'" ngf-multiple="false"
+                 ngf-pattern="'image/*'">
+                   <img ng-src="{{profile.user.avatar}}" alt="" ng-if="profile.user.avatar">
+            </div>
+
+            <div ng-hide="profile.checkMyProfile()" class="profile__avatar">
+                   <img ng-src="{{profile.user.avatar}}" alt="{{profile.user.username}}" ng-if="profile.user.avatar">
+            </div>
+          </div>
+          <div class="col-lg-10">
+            <div class="profile__oneLineStory">
+              <span ng-hide="profile.oneLineStoryActive">
+                <span class="profile__oneLineStory__text" ng-hide="profile.user.oneLineStory">
+                  Расскажите о себе парой строчек
+                </span>
+              </span>
+              <span ng-hide="profile.oneLineStoryActive">
+                <span class="profile__oneLineStory__text" ng-show="profile.user.oneLineStory">
+                  {{profile.user.oneLineStory}}
+                </span>
+              </span>
+              <form ng-submit="profile.onLineStorySave()" class="inline-block" ng-show="profile.oneLineStoryActive">
+                <input focus-if="profile.oneLineStoryFocus" type="text" ng-model="profile.oneLineStory" id="oneLineStory">
+                <div>
+                  <button ng-click="profile.onLineStoryEdit(false)" class="btn btn-danger btn-sm">Отменить</button>
+                  <input type="submit" value="Сохранить" class="btn btn-my btn-sm">
+                </div>
+              </form>
+              <i ng-show="profile.checkMyProfile()" class="fa fa-pencil" ng-click="profile.onLineStoryEdit(true)" ng-hide="profile.oneLineStoryActive"></i>
+            </div>
+
+            <a ng-hide="profile.checkMyProfile()" href="#/chat/{{profile.user.username}}" class="btn btn-my pull-xs-right">Начать общение</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="profile__middle">
+    <div class="inner">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-md-5">
+            <div class="profile__blocks">
+              <desc desc="profile.user.desc" myprofile="profile.checkMyProfile()"></desc>
+              <skills skills="profile.user.skills" myprofile="profile.checkMyProfile()"></skills>
+            </div>
+          </div>
+          <div class="col-md-7">
+            <usersteps myprofile="profile.checkMyProfile()"></usersteps>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

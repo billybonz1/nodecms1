@@ -1,0 +1,55 @@
+<div class="chat" ng-init="chat.initChat()">
+  <div class="inner">
+    <div class="container-fluid">
+
+      <div class="row chat-inner" id="chat">
+        <div class="col-md-12" ng-show="chat.messages.length">
+          <div class="">
+            <div class="chat-message" ng-class="{chatMessageNew: !message.viewed}" ng-repeat="message in chat.messages">
+              <div ng-init="messagesDate(message,$index)">
+
+              </div>
+              <div class="pull-lg-left">
+                <div class="chat-message-text">
+                  <div ng-show="$root.username == message.from" class="chat-message-avatar">
+                    <img ng-src="{{$root.avatar}}" class="chat-message-img" ng-show="$root.avatar">
+                    <div class="chat-message-letter" ng-show="!$root.avatar">
+                      {{$root.usernameFirstLetter}}
+                    </div>
+                  </div>
+                  <div ng-show="$root.username != message.from" class="chat-message-avatar">
+                    <img ng-src="{{chat.chatUserAvatar}}" class="chat-message-img" ng-show="chat.chatUserAvatar">
+                    <div class="chat-message-letter" ng-show="!chat.chatUserAvatar">
+                      {{message.from | limitTo: 1}}
+                    </div>
+                  </div>
+                  <div class="chat-message-time">{{message.date | date: "HH:mm"}}</div>
+                  {{message.message}}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-12" ng-hide="chat.messages.length">
+          <div class="col-md-12 text-center chat-empty">
+            Переписка с даным пользователем пуста
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <form name="chatForm" novalidate="novalidate" ng-submit="chat.sendMessage()">
+          <div class="col-lg-10">
+            <textarea name="message" ng-focus="chat.messageRead()" ng-model="chat.message" required class="form-control" ng-keypress="chat.beforeSendMessage($event)"></textarea>
+          </div>
+          <div class="col-lg-2">
+            <input class="btn btn-my" value="Отправить" type="submit" ng-disabled="chatForm.$invalid">
+          </div>
+        </form>
+      </div>
+
+
+    </div>
+  </div>
+</div>

@@ -21,7 +21,20 @@ var UserSchema = new mongoose.Schema({
    },
    username: {
       type: String,
-      required: true
+      required: true,
+      unique: true
+   },
+   avatar: {
+      type: String
+   },
+   oneLineStory: {
+      type: String
+   },
+   skills: {
+      type: Array
+   },
+   desc: {
+      type: String
    }
 });
 
@@ -56,4 +69,22 @@ UserSchema.methods.comparePassword = function(pw, cb){
     });
 };
 
-module.exports = mongoose.model('User', UserSchema);
+var User = module.exports = mongoose.model('User', UserSchema);
+
+
+module.exports.updateUserAvatar = function(id, avatarPath, callback){
+    User.update({ _id: id }, { $set: { avatar: avatarPath }}, callback);
+};
+
+module.exports.updateOneLineStory = function(id, oneLineStory, callback){
+    User.update({ _id: id }, { $set: { oneLineStory: oneLineStory }}, callback);
+};
+
+module.exports.updateUserDescription = function(id, desc, callback){
+    User.update({ _id: id }, { $set: { desc: desc }}, callback);
+};
+
+
+module.exports.updateSkills = function(id, skills, callback){
+    User.update({ _id: id }, { $set: { skills: skills }}, callback);
+};

@@ -2,6 +2,13 @@
 <project version="4">
   <component name="PublishConfigData">
     <serverData>
+      <paths name="280">
+        <serverdata>
+          <mappings>
+            <mapping local="$PROJECT_DIR$" web="/" />
+          </mappings>
+        </serverdata>
+      </paths>
       <paths name="BlackHole">
         <serverdata>
           <mappings>
@@ -114,7 +121,28 @@
           </mappings>
         </serverdata>
       </paths>
+      <paths name="incoz">
+        <serverdata>
+          <mappings>
+            <mapping local="$PROJECT_DIR$" web="/" />
+          </mappings>
+        </serverdata>
+      </paths>
       <paths name="info.vertexlife">
+        <serverdata>
+          <mappings>
+            <mapping local="$PROJECT_DIR$" web="/" />
+          </mappings>
+        </serverdata>
+      </paths>
+      <paths name="kalinigroup">
+        <serverdata>
+          <mappings>
+            <mapping local="$PROJECT_DIR$" web="/" />
+          </mappings>
+        </serverdata>
+      </paths>
+      <paths name="landing1.kalinigroup.com">
         <serverdata>
           <mappings>
             <mapping local="$PROJECT_DIR$" web="/" />
@@ -135,6 +163,27 @@
           </mappings>
         </serverdata>
       </paths>
+      <paths name="mydelrus">
+        <serverdata>
+          <mappings>
+            <mapping local="$PROJECT_DIR$" web="/" />
+          </mappings>
+        </serverdata>
+      </paths>
+      <paths name="netrogatburo">
+        <serverdata>
+          <mappings>
+            <mapping local="$PROJECT_DIR$" web="/" />
+          </mappings>
+        </serverdata>
+      </paths>
+      <paths name="numer.su">
+        <serverdata>
+          <mappings>
+            <mapping local="$PROJECT_DIR$" web="/" />
+          </mappings>
+        </serverdata>
+      </paths>
       <paths name="salesmachine.liftmarketing">
         <serverdata>
           <mappings>
@@ -143,6 +192,20 @@
         </serverdata>
       </paths>
       <paths name="ser.masterovoy.com.ua">
+        <serverdata>
+          <mappings>
+            <mapping local="$PROJECT_DIR$" web="/" />
+          </mappings>
+        </serverdata>
+      </paths>
+      <paths name="start.liftmarketing.ru/salesmachine">
+        <serverdata>
+          <mappings>
+            <mapping local="$PROJECT_DIR$" web="/" />
+          </mappings>
+        </serverdata>
+      </paths>
+      <paths name="start.liftmarketing.ru/upsales/">
         <serverdata>
           <mappings>
             <mapping local="$PROJECT_DIR$" web="/" />

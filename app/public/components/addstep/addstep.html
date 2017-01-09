@@ -1,0 +1,28 @@
+<div class="addstep">
+    <div class="inner">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-5">
+                    <form ng-submit="addstep.addStep()"><br/>
+                        <div class="form-group">
+                            <input required="" type="text" placeholder="Что я сделаю ?"
+                                                       ng-model="addstep.step.label" class="form-control input-group"/></div>
+                        <div class="form-group">
+                            <div class="input-group price-group">
+                                <input required="" type="number" placeholder="Цена" ng-model="addstep.step.price" class="form-control"/>
+                                <select ng-model="addstep.step.currency" name="currency" size="1" class="input-group-addon form-control">
+                                    <option>USD</option>
+                                    <option ng-selected="true">UAH</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                          <textarea required="" ng-model="addstep.step.desc" placeholder="Описание" class="form-control"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-my btn-my-outline">Добавить</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

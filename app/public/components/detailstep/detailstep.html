@@ -1,0 +1,23 @@
+<div class="detailstep">
+    <div class="inner">
+        <div class="container-fluid">
+            <div ng-init="detailstep.getStep()" class="row">
+                <div class="col-lg-12">
+                    <h1>{{detailstep.step.label}}</h1>
+                </div>
+                <div class="col-md-4">
+                    <img ng-src="{{detailstep.step.img}}"/>
+                </div>
+                <div class="col-md-8">
+                    <p>{{detailstep.step.desc}}</p>
+                </div>
+                <div ng-show="detailstep.checkMyStep()" class="col-lg-12">
+                    <a ng-click="detailstep.deleteStep()" class="btn btn-danger pull-xs-right">Удалить</a>
+                    <a ng-href="#/steps/edit/{{detailstep.step._id}}" class="btn btn-my pull-xs-right">Редактировать</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

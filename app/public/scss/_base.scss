@@ -1,4 +1,4 @@
-@import "bourbon";
+// @import "bourbon";
 @import "vars";
 
 body input:focus:required:invalid,
@@ -33,9 +33,9 @@ h2{
 }
 
 input{
-  @include placeholder {
-    font-family: $default-font;
-  }
+  // @include placeholder {
+  //   font-family: $default-font;
+  // }
 }
 
 .btn{
@@ -117,7 +117,7 @@ a.btn-danger:not([href]){
 
 .hint--top:before {
   margin-left: -5px;
-  margin-bottom: -12px;
+  margin-bottom: -10px;
   border-top-color: $first-color;
 }
 
@@ -134,4 +134,17 @@ a.btn-danger:not([href]){
 }
 .hint--top:hover:before, .hint--top:hover:after {
   transform: translateY(-10px);
+}
+
+.inline-block{
+  display: inline-block;
+}
+
+.text-center{
+  text-align: center;
+}
+
+.hidden{
+  display: none!important;
+  visibility: hidden!important;
 }

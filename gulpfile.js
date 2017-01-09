@@ -41,6 +41,17 @@ gulp.task('jade2html', function() {
 });
 
 
+gulp.task('customjade2html', function() {
+    var YOUR_LOCALS = {};
+
+    gulp.src('app/public/components/register/register.jade')
+        .pipe(jade({
+            locals: YOUR_LOCALS
+        }))
+        .pipe(gulp.dest('app/public/components/register'))
+});
+
+
 
 gulp.task('browser-sync', function() {
     browserSync({

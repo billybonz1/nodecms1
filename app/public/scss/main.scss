@@ -1,4 +1,4 @@
-@import "bourbon";
+// @import "bourbon";
 @import "vars";
 @import "fonts";
 @import "icons";
@@ -34,21 +34,6 @@ ul{
   color: #fff;
 }
 
-
-.form-search{
-  margin: 7px 17px;
-  line-height: 48px;
-  .form-group{
-    width: 76%;
-  }
-  input{
-    font-size: 14px;
-  }
-  .btn{
-    padding: 0.4rem 1rem;
-    margin-left: 1px;
-  }
-}
 
 .form-login{
   text-align: center;
@@ -233,4 +218,65 @@ ul{
     text-align: center;
     width: 100%;
     display: block;
+}
+
+
+//loader
+$green: #008744;
+$blue: #0057e7;
+$red: #d62d20;
+$yellow: #ffa700;
+$white: #eee;
+
+
+.circular {
+  animation: rotate 2s linear infinite;
+  height: 20px;
+  transform-origin: center center;
+  width: 20px;
+}
+
+.path {
+  stroke-dasharray: 1, 200;
+  stroke-dashoffset: 0;
+  animation: dash 1.5s ease-in-out infinite, color 6s ease-in-out infinite;
+  stroke-linecap: round;
+}
+
+@keyframes rotate {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes dash {
+  0% {
+    stroke-dasharray: 1, 200;
+    stroke-dashoffset: 0;
+  }
+  50% {
+    stroke-dasharray: 89, 200;
+    stroke-dashoffset: -35px;
+  }
+  100% {
+    stroke-dasharray: 89, 200;
+    stroke-dashoffset: -124px;
+  }
+}
+
+@keyframes color {
+  100%,
+  0% {
+    stroke: $red;
+  }
+  40% {
+    stroke: $blue;
+  }
+  66% {
+    stroke: $green;
+  }
+  80%,
+  90% {
+    stroke: $yellow;
+  }
 }

@@ -1,0 +1,16 @@
+<div class="services-item-wrap">
+      <div class="services-item-seller">
+          <a class="seller-name" ng-href="#/user/{{$ctrl.step.username}}">{{$ctrl.step.username}}</a>
+      </div>
+      <a ng-href="/#/steps/{{$ctrl.step._id}}" class="service-item-middle">
+          <img ng-src="{{$ctrl.step.img}}"  alt="{{$ctrl.step.label}}"/>
+          <h3>{{$ctrl.step.label}}</h3>
+      </a>
+
+      <div class="service-item-bottom clearfix">
+          <a href="" data-hint="Добавить в любимые" class="icn-heart hint--top pull-xs-left">
+              <i class="fa fa-heart"></i>
+          </a>
+          <strong class="pull-xs-right">{{$ctrl.step.price}} {{$ctrl.step.currency}}</strong>
+      </div>
+</div>

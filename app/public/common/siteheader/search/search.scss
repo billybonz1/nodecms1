@@ -1,0 +1,37 @@
+.form-search{
+  margin: 7px 17px;
+  line-height: 48px;
+  .form-group{
+    width: 76%;
+  }
+  input{
+    font-size: 14px;
+    box-shadow: 0 0 5px 0 #ccc;
+  }
+  .btn{
+    padding: 0.4rem 1rem;
+    margin-left: 1px;
+  }
+  .circular{
+    position: absolute;
+    right: 11px;
+    top: 7px;
+    z-index: 2;
+  }
+}
+
+.form-search__results{
+  position: absolute;
+  top: 34px;
+  width: 100%;
+  background: #fff;
+  box-shadow: 0 0 5px 0 #ccc;
+  z-index: 1;
+  a{
+    font-size: 14px;
+    color: #000;
+    display: block;
+    padding: 10px 20px;
+    line-height: 17px;
+  }
+}

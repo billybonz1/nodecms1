@@ -1,0 +1,44 @@
+<div id="header">
+    <div class="inner">
+        <div class="container-fluid">
+            <div class="row" ng-init="siteheader.getUser()">
+                <div class="col-md-2"><a ng-href="#/" class="logo">OneStep</a></div>
+                <div class="col-md-5">
+                    <search></search>
+                </div>
+                <div class="col-md-5">
+                    <nav ng-hide="$root.token" class="main-nav main-nav-user pull-md-right">
+                        <ul>
+                            <li><a ng-href="#/login">Войти</a></li>
+                            <li><a ng-href="#/register" class="header-link pull-md-right">Зарегистрироваться</a></li>
+                        </ul>
+                    </nav>
+
+                    <nav ng-show="$root.token" class="main-nav main-nav-user pull-md-right">
+                        <ul>
+                            <li class="dropdown-container header-user">
+                                <a ng-href="#/user/{{$root.username}}" class="user-trigger">
+                                  <span class="user-pict-24">
+                                    <span class="missing-image-user" ng-hide="$root.avatar">{{$root.usernameFirstLetter}}</span>
+                                    <img ng-src="{{$root.avatar}}" alt="{{$root.username}}" ng-show="$root.avatar">
+                                  </span>
+                                  <span class="user-name">{{$root.username}}</span>
+                                </a>
+                                <div class="dropdown">
+                                    <ul>
+                                        <li><a ng-href="#/user/{{$root.username}}">Профиль</a></li>
+                                        <li><a ng-click="siteheader.logout()">Выйти</a></li>
+                                    </ul>
+                                </div>
+                            </li>
+                        </ul>
+                    </nav>
+
+                    <nav ng-show="$root.token" class="main-nav main-nav-user pull-md-right">
+                        <headerchat></headerchat>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

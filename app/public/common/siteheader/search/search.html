@@ -1,0 +1,16 @@
+<form class="form-inline form-search">
+    <div class="form-group">
+        <div class="input-group">
+          <input type="text" placeholder="Найти услугу" class="form-control" ng-model="search.s" ng-keyup="search.searchSteps($event)" />
+          <svg ng-show="search.loader" class="circular" viewBox="25 25 50 50">
+            <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10"/>
+          </svg>
+          <div class="form-search__results" ng-show="search.results">
+            <a ng-href="#/steps/{{step._id}}" ng-repeat="step in search.results" ng-click="search.clearSearch()">
+              {{step.label}}
+            </a>
+          </div>
+        </div>
+    </div>
+    <button type="submit" class="btn btn-my btn-my-outline"><i class="fa fa-search"></i></button>
+</form>

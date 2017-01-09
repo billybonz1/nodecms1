@@ -1,0 +1,70 @@
+<div class="profile__block">
+  <h3>
+    <span>
+      <span>Что Вы умеете ?</span>
+      <span ng-hide="!skills.myprofile" class="icon-wrapper hint--top" data-hint="Позвольте Вашим клиентам узнать о Ваших навыках. Навыки, которые получили на прошлых работах, занимаясь люимым делом либо то, с чем сталкиваетесь каждый день.">
+        <i class="fa fa-question-circle-o"></i>
+      </span>
+    </span>
+    <div class="add" ng-click="skills.addSkillActive = true" ng-hide="skills.addSkillActive || !skills.myprofile">Добавить умение</div>
+  </h3>
+
+
+  <div class="form-wrapper" ng-show="skills.addSkillActive">
+    <form ng-submit="skills.addSkill()" novalidate="novalidate" name="addSkillForm">
+      <div class="autocomplete-wrap">
+        <input focus-if="skills.addSkillActive" maxlength="20" type="text" placeholder="Добавить умение" сlass="form-control" ng-model="skills.newSkill.label" name="skill" required ng-keyup="skills.searchSkills($event)">
+      </div>
+      <select class="level-select" ng-model="skills.newSkill.level" name="level" required>
+        <option value="">Уровень мастерства</option>
+        <option value="beginner">Начинающий</option>
+        <option value="intermediate">Опытный</option>
+        <option value="pro">Эксперт</option>
+      </select>
+      <div class="pull-xs-right">
+        <div class="btn btn-danger btn-sm" ng-click="skills.addSkillActive = false">Отменить</div>
+        <input class="btn btn-my btn-sm" value="Добавить" type="submit" ng-disabled="addSkillForm.$invalid">
+      </div>
+      <div class="clearfix"></div>
+    </form>
+  </div>
+
+  <div class="form-wrapper" ng-show="skills.editSkillActive">
+    <form ng-submit="skills.updateSkill()" novalidate="novalidate" name="editSkillForm">
+      <div class="autocomplete-wrap">
+        <input focus-if="skills.editSkillActive" maxlength="20" type="text" placeholder="Умение" сlass="form-control" ng-model="skills.editSkill.label" name="skill" required ng-keyup="skills.searchSkills($event)">
+      </div>
+      <select class="level-select" ng-model="skills.editSkill.level" name="level" required>
+        <option value="">Уровень мастерства</option>
+        <option value="beginner">Начинающий</option>
+        <option value="intermediate">Опытный</option>
+        <option value="pro">Эксперт</option>
+      </select>
+      <div class="pull-xs-right">
+        <div class="btn btn-danger btn-sm" ng-click="skills.editSkillActive = false">Отменить</div>
+        <input class="btn btn-my btn-sm" value="Редактировать" type="submit" ng-disabled="editSkillForm.$invalid">
+      </div>
+      <div class="clearfix"></div>
+    </form>
+  </div>
+
+  <div class="skills">
+    <div class="skill" ng-repeat="(key, skill) in skills.skills" >
+      <span class="skill__label">{{skill.label}}</span>
+      <span>-</span>
+      <span class="skill__level">{{skill.level}}</span>
+      <span class="skill__buttons" ng-hide="!skills.myprofile">
+        <span class="icon-wrapper hint--top" data-hint="Редактировать" ng-click="skills.updateForm($event)">
+          <i class="fa fa-pencil" data-key="{{key}}"></i>
+        </span>
+        <span class="icon-wrapper hint--top" data-hint="Удалить" ng-click="skills.deleteSkill($event)">
+          <i class="fa fa-trash" data-key="{{key}}"></i>
+        </span>
+      </span>
+    </div>
+    <div ng-hide="skills.addSkillActive || skills.skills.length > 0">
+      Не добавлено ни одного умения
+    </div>
+  </div>
+
+</div>
